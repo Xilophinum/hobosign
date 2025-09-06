@@ -9,4 +9,4 @@ For some strange reason (I am not a modeler), the first time anyone uses a sign,
 
 
 # Video 
-<video controls src="Hobosign.mp4" title="Title"></video>
+[<video controls src="Hobosign.mp4" title="Title"></video>](https://github.com/Xilophinum/hobosign/blob/main/Hobosign.mp4)
