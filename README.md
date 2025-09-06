@@ -8,3 +8,5 @@ Just use /hobosign and create the text you would like to appear on the cardboard
 For some strange reason (I am not a modeler), the first time anyone uses a sign, it doesnt render. Why is beyond me. If you figure out why, create a pull request to fix! Will luv you long time. 
 
 
+# Video 
+![video_preview](https://streamable.com/saha0l)
