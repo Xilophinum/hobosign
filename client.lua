@@ -9,12 +9,6 @@ RegisterCommand("hobosign", function()
             DeleteEntity(propObject)
             propObject = 0
         end
-        if videoDUI and handle then
-            ReleaseDui(videoDUI.id)
-            ReleaseNamedRendertarget(handle)
-            videoDUI = nil
-            handle = nil
-        end
         isBegging = false
         return
     end
@@ -26,7 +20,7 @@ end)
 
 RegisterNUICallback("savesign", function(data, cb)
     if data.content then
-        TriggerServerEvent("vox_hobosign:saveSign", data)
+        TriggerServerEvent("hobosign:saveSign", data)
     end
     SetNuiFocus(false, false)
     cb("ok")
@@ -48,19 +42,16 @@ AddStateBagChangeHandler('hobosign', nil, function(bagName, _, value)
         if not PlayersData[playerId] then
             PlayersData[playerId] = {}
         end
-        PlayersData[playerId].duiObj = CreateDui(string.format("https://cfx-nui-%s/web/dist/index.html", GetCurrentResourceName(), math.random(100000, 999999)), Templates[value.picTemplate].width, Templates[value.picTemplate].height)
+        PlayersData[playerId].duiObj = CreateDui(string.format("https://cfx-nui-%s/web/dist/index.html", GetCurrentResourceName(), math.random(100000, 999999)), 256, 256)
         PlayersData[playerId].duiHandle = GetDuiHandle(PlayersData[playerId].duiObj)
         PlayersData[playerId].txdid = "texture_" .. math.random(1, 100000)
         PlayersData[playerId].txd = CreateRuntimeTxd(PlayersData[playerId].txdid)
         PlayersData[playerId].textureid = "textureid_" .. math.random(1, 100000)
         PlayersData[playerId].texture = CreateRuntimeTextureFromDuiHandle(PlayersData[playerId].txd, PlayersData[playerId].textureid, PlayersData[playerId].duiHandle)
-        RemoveReplaceTexture("hobosign_textures", ('sign_%s'):format(value.id))
-        AddReplaceTexture("hobosign_textures", ('sign_%s'):format(value.id), PlayersData[playerId].txdid, PlayersData[playerId].textureid)
         while not DUILoaded do Wait(0) end
         SendDuiMessage(PlayersData[playerId].duiObj, json.encode({
             action = "sign",
-            content = value.content,
-            picTemplate = value.picTemplate or "1"
+            content = value.content
         }))
         if isLocalPlayer then 
             local animDict = "amb@world_human_bum_freeway@male@base"
@@ -68,13 +59,17 @@ AddStateBagChangeHandler('hobosign', nil, function(bagName, _, value)
             while not HasAnimDictLoaded(animDict) do
                 Wait(100)
             end
-            
+            print(value.id)
             -- Create the prop
-            local propModel = GetHashKey(("prop_custom_beggers_sign_%s"):format(value.id))
+            local propModel = GetHashKey(("bzzz_prop_carton_sign_%s"):format(value.id))
             RequestModel(propModel)
             while not HasModelLoaded(propModel) do
                 Wait(100)
             end
+
+            RemoveReplaceTexture("bzzz_prop_carton_signs", ('paper_%s'):format(value.id))
+            AddReplaceTexture("bzzz_prop_carton_signs", ('paper_%s'):format(value.id), PlayersData[playerId].txdid, PlayersData[playerId].textureid)
+            
             local playerCoords = GetEntityCoords(playerPed)
             local createdObject = CreateObject(propModel, playerCoords.x, playerCoords.y, playerCoords.z, true, true, true)
             if createdObject ~= nil then

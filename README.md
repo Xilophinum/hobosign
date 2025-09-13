@@ -4,9 +4,13 @@ A FiveM implementation of a custom hobo sign text. Player sync and custom fonts
 # usage
 Just use /hobosign and create the text you would like to appear on the cardboard sign, click save and voila!
 
-# Known Issues
-For some strange reason (I am not a modeler), the first time anyone uses a sign, it doesnt render. Why is beyond me. If you figure out why, create a pull request to fix! Will luv you long time. 
-
+## Dependencies
+- Mrs. BzZz Custom Signs | Link: [Custom Signs](https://bzzz.tebex.io/package/5838088)
+- ox_lib
 
 # Video 
-<video controls src="Hobosign.mp4" title="Title"></video>
+(Streamable)[https://streamable.com/13qlot]
+https://streamable.com/13qlot
+
+## Final reminder
+I can't believe I have to say this, but if you download something from Github, remove the appended -main from the end of the resource. If you don't, it will never work. resource name is hardcoded to be ``hobosign``, NOT **hobosign-main**

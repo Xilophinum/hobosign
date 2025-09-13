@@ -27,7 +27,7 @@ export default {
 	},
 	mounted() {
 		window.addEventListener("message", this.eventHandler);
-		this.store.SendMessage("loaded", {})
+		fetch(`https://hobosign/loaded`, { method: 'POST', headers: { 'Content-Type': 'application/json; charset=UTF-8' }, body: JSON.stringify({}) })
 	},
 	unmounted() {
 		window.removeEventListener("message", this.eventHandler);

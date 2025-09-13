@@ -1,14 +1,13 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-	<div id="sign" v-show="showing" :style="{backgroundImage: getBGImage(), width: getWidth(), height: getHeight()}">
+	<div id="sign" v-show="showing" :style="{backgroundImage: getBGImage(), width: '256px', height: '256px'}">
 		<div class="content-wrapper" v-html="content"></div>
 	</div>
 </template>
 
 <script>
 import { useStore } from '../stores/store'
-import img1 from '../assets/sign_01.png'
-import img2 from '../assets/sign_02.png'
+import img from '../assets/sign_01.png'
 
 export default {
 	components: {
@@ -23,12 +22,7 @@ export default {
 	data() {
 		return {
 			showing: false,
-			content: "",
-			picTemplate: 1,
-			templateMap: {
-				1: { width: "256px", height: "256px" },
-				2: { width: "256px", height: "256px" }
-			}
+			content: ""
 		}
 	},
     computed: {
@@ -36,25 +30,13 @@ export default {
     },
 	methods: {
         getBGImage() {
-            switch (this.picTemplate) {
-                case 1:
-                    return `url(${img1})`
-                case 2:
-                    return `url(${img2})`
-            }
-		},
-		getWidth() {
-            return this.templateMap[this.picTemplate].width
-		},
-		getHeight() {
-            return this.templateMap[this.picTemplate].height
-		},
+            return `url(${img})`
+		}
     },
     mounted() {
 		this.eventBus.on('sign', (data) => {
 			this.showing = true
 			this.content = data.content
-			this.picTemplate = Number(data.picTemplate)
 		})
     },
     unmounted() {

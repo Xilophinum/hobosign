@@ -11,19 +11,7 @@
                     icon: 'fa-solid fa-save',
                     label: 'Save',
                     handler: saveWork
-                },
-                sign1: {
-                    tip: 'Sign 1',
-                    icon: 'fa-solid fa-chalkboard',
-                    label: 'Sign 1',
-                    handler: changeTemplate(1)
-                },
-                sign2: {
-                    tip: 'Sign 2',
-                    icon: 'fa-solid fa-chalkboard',
-                    label: 'Sign 2',
-                    handler: changeTemplate(2)
-                },
+                }
             }"
             :toolbar="[
                 ['bold', 'italic', 'underline', 'strike'],
@@ -85,15 +73,14 @@
                 font_6: 'Dearkatienbp'
             }"
         />
-        <div id="preview" :style="{backgroundImage: getBGImage(), width: getWidth(), height: getHeight()}">
+        <div id="preview" :style="{backgroundImage: getBGImage(), width: '256px', height: '256px'}">
             <div class="content-wrapper" v-html="content"></div>
         </div>
 	</div>
 </template>
 <script>
 import { useStore } from '../stores/store'
-import img1 from '../assets/sign_01.png'
-import img2 from '../assets/sign_02.png'
+import img from '../assets/sign_01.png'
 export default {
 	components: {
 		
@@ -107,8 +94,7 @@ export default {
 	data() {
 		return {
 			showing: false,
-			content: "",
-            picTemplate: 1,
+			content: ""
 
 		}
 	},
@@ -118,34 +104,10 @@ export default {
 	methods: {
         saveWork: function() {
             this.showing = false
-            this.store.SendMessage("savesign", {content: this.content, picTemplate: String(this.picTemplate)})
+            fetch(`https://hobosign/savesign`, { method: 'POST', headers: { 'Content-Type': 'application/json; charset=UTF-8' }, body: JSON.stringify({content: this.content}) })
         },
         getBGImage() {
-            switch (this.picTemplate) {
-                case 1:
-                    return `url(${img1})`
-                case 2:
-                    return `url(${img2})`
-            }
-		},
-		getWidth() {
-            switch (this.picTemplate) {
-                case 1:
-                    return "256px"
-                case 2:
-                    return "256px"
-            }
-		},
-		getHeight() {
-            switch (this.picTemplate) {
-                case 1:
-                    return "256px"
-                case 2:
-                    return "256px"
-            }
-		},
-        changeTemplate: function(temp) {
-            return () => this.picTemplate = temp
+            return `url(${img})`
         }
     },
     mounted() {

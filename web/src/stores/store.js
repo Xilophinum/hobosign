@@ -3,11 +3,6 @@ import { defineStore } from 'pinia'
 
 export const useStore = defineStore('store', {
     state: () => ({
-        
+        resourceName: null,
     }),
-    actions: {
-        SendMessage(endpoint, data) {
-            fetch(`https://hobosign/${endpoint}`, { method: 'POST', headers: { 'Content-Type': 'application/json; charset=UTF-8' }, body: JSON.stringify(data) })
-        },
-    },
 })

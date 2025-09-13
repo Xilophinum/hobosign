@@ -15,8 +15,6 @@ files {
     'web/dist/assets/*.woff2',
 }
 
-data_file 'DLC_ITYP_REQUEST' 'stream/custom_beggers_sign.ytyp'
-
 shared_scripts {
 	'@ox_lib/init.lua',
     'config.lua'
