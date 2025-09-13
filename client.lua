@@ -59,7 +59,6 @@ AddStateBagChangeHandler('hobosign', nil, function(bagName, _, value)
             while not HasAnimDictLoaded(animDict) do
                 Wait(100)
             end
-            print(value.id)
             -- Create the prop
             local propModel = GetHashKey(("bzzz_prop_carton_sign_%s"):format(value.id))
             RequestModel(propModel)
