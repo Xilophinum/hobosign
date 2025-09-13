@@ -9,7 +9,7 @@ Just use /hobosign and create the text you would like to appear on the cardboard
 - ox_lib
 
 # Video 
-(Streamable)[https://streamable.com/13qlot]
+(Streamable)
 https://streamable.com/13qlot
 
 ## Final reminder
